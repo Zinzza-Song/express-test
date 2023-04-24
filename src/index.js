@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import UsersController from "./users";
+import Controllers from "./controllers";
 
 const app = express();
 
@@ -14,7 +14,15 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "700mb" }));
 
-app.use("/users", UsersController.router);
+Controllers.forEach((controller) => {
+  app.use(controller.path, controller.router);
+});
+
+app.use((err, req, res, next) => {
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || "서버에서 에러 발생함" });
+});
 
 const day = new Date();
 const day2 = dayjs(day).format("YYYY-MM-DD");
