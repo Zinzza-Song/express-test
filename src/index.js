@@ -1,9 +1,8 @@
 import express, { Router } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import dayjs from "dayjs";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { swaggerDocs, options } from "./swagger";
+import swaggerUI from "swagger-ui-express";
 
 import Controllers from "./controllers";
 
@@ -24,16 +23,11 @@ app.use((err, req, res, next) => {
     .json({ message: err.message || "서버에서 에러 발생함" });
 });
 
-const day = new Date();
-const day2 = dayjs(day).format("YYYY-MM-DD");
-console.log({ day, day2 });
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(undefined, options));
 
-const pwd = "1234";
-const hashpwd = bcrypt.hashSync(pwd, 10);
-console.log({ hashpwd });
-
-const token = jwt.sign("1234", "abcdifwfoiewg34ewgh46s");
-console.log({ token });
+app.get("/swagger.json", (req, res) => {
+  res.status(200).json(swaggerDocs);
+});
 
 // app.get("/", (req, res) => {
 //   res.send("Express Server");
