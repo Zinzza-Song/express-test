@@ -1,3 +1,4 @@
-import * as UserSwagger from "./users/swagger";
+export * as UserSwagger from "./users/swagger";
 
-export const Swaggers = [UserSwagger];
+// import * as UserSwagger from "./users/swagger";
+// export const Swaggers = [UserSwagger];
