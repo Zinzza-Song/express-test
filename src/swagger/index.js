@@ -1,7 +1,9 @@
-import * as Swaggers from "../controllers/swagger";
+import * as UserSwagger from "../users/swagger";
 import defaultSwagger from "./defaultSwagger";
 
-console.log(Swaggers);
+const Swaggers = {
+  ...UserSwagger,
+};
 
 const { paths } = Object.values(Swaggers).reduce(
   (acc, apis) => {
@@ -10,6 +12,7 @@ const { paths } = Object.values(Swaggers).reduce(
       console.log(api);
       return { ...api };
     });
+
     APIs.forEach((api) => {
       const key = Object.keys(api)[0];
       console.log(key);

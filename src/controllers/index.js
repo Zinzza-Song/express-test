@@ -1,3 +1,5 @@
-import UsersController from "./users";
+import { UserController } from "../users";
 
-export default [UsersController];
+const Controllers = [UserController];
+
+export default Controllers;
