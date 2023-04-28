@@ -7,6 +7,10 @@ import { swaggerDocs, options } from "./swagger";
 import Controllers from "./controllers";
 import database from "./database";
 
+dotenv.config();
+
+const password = "12345";
+
 async () => {
   const app = express();
   await database.$connect();
@@ -31,51 +35,6 @@ async () => {
   app.get("/swagger.json", (req, res) => {
     res.status(200).json(swaggerDocs);
   });
-
-  // app.get("/", (req, res) => {
-  //   res.send("Express Server");
-  // });
-
-  // app.get("/users", (req, res) => {
-  //   res.status(200).json({ users });
-  // });
-
-  // app.post("/users", (req, res) => {
-  //   const { name, age } = req.body;
-
-  //   users.push({
-  //     id: new Date().getTime(),
-  //     name,
-  //     age,
-  //   });
-
-  //   res.status(201).json({ users });
-  // });
-
-  // app.patch("/users/:id", (req, res) => {
-  //   const { id } = req.params;
-  //   const { name, age } = req.body;
-  //   console.log(req.params);
-
-  //   const userIdx = users.findIndex((user) => user.id === Number(id));
-
-  //   users[userIdx] = {
-  //     id: users[userIdx].id,
-  //     name: name ?? users[userIdx].name,
-  //     age: age ?? users[userIdx].age,
-  //   };
-
-  //   res.status(204).json({ users });
-  // });
-
-  // app.delete("/users/:id", (req, res) => {
-  //   const { id } = req.params;
-
-  //   const deleteUsers = users.filter((user) => user.id !== Number(id));
-  //   users = deleteUsers;
-
-  //   res.status(204).json({ users });
-  // });
 
   app.listen(8000, () => {
     console.log("서버 시작");
