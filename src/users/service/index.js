@@ -8,9 +8,7 @@ export class UserService {
       },
     });
     console.log(user);
-
     if (!user) return false;
-
     return true;
   }
 
@@ -22,7 +20,6 @@ export class UserService {
     });
 
     if (!user) throw { status: 404, message: "사용자를 찾을 수 없다" };
-
     return user;
   }
 
@@ -31,16 +28,14 @@ export class UserService {
       skip,
       take,
     });
-
     const cnt = await database.user.count();
-
     return {
       users,
       cnt,
     };
   }
 
-  async CreateUserdto(props) {
+  async createUser(props) {
     const newUser = await database.user.create({
       data: {
         name: props.name,
@@ -49,22 +44,21 @@ export class UserService {
         phoneNumber: props.phoneNumber,
       },
     });
-
     return newUser.id;
   }
 
   async updateUser(id, props) {
-    const isExist = await database.user.findUnique({
+    const isExit = await database.user.findUnique({
       where: {
         id,
       },
     });
 
-    if (!isExist) throw { status: 404, message: "사용자를 찾을 수 없다" };
+    if (!isExit) throw { status: 404, message: "사용자를 찾을 수 없다" };
 
     await database.user.update({
       where: {
-        id: isExist.id,
+        id: isExit.id,
       },
       data: {
         name: props.name,
@@ -76,17 +70,16 @@ export class UserService {
   }
 
   async deleteUser(id) {
-    const isExist = await database.user.findUnique({
+    const isExit = await database.user.findUnique({
       where: {
         id,
       },
     });
-
-    if (!isExist) throw { status: 404, message: "사용자를 찾을 수 없다" };
+    if (!isExit) throw { status: 404, message: "사용자를 찾을 수 없다" };
 
     await database.user.delete({
       where: {
-        id: isExist.id,
+        id: isExit.id,
       },
     });
   }

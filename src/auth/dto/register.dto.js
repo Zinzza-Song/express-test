@@ -10,20 +10,18 @@ export class RegisterDTO {
   age;
   password;
 
-  constructor(props) { 
+  constructor(props) {
     this.name = props.name;
     this.email = props.email;
     this.phoneNumber = props.phoneNumber;
     this.age = props.age;
     this.password = props.password;
   }
-
   async hashPassword() {
-    const hashPassword = await bcrypt.hash(
+    const hashedPassword = await bcrypt.hash(
       this.password,
       Number(process.env.PASSWORD_SALT)
     );
-
-    return hashPassword;
+    return hashedPassword;
   }
 }

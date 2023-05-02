@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { Userdto, CreateUserdto, UpdateUserdto } from "../dto";
 import { pagination } from "../../middleware/pagination";
+import { Userdto, CreateUserdto, UpdateUserdto } from "../dto";
 import { UserService } from "../service";
 
 class UsersController {
@@ -9,7 +9,7 @@ class UsersController {
   userService;
 
   constructor() {
-    this.router = Router();
+    this.router = Router(); //Router객체
     this.initial();
     this.userService = new UserService();
   }
@@ -18,14 +18,14 @@ class UsersController {
     this.router.get("/", pagination, this.getUser.bind(this));
     this.router.get("/detail/:id", this.getU.bind(this));
     this.router.post("/", this.createUser.bind(this));
-    this.router.post("/update/:id", this.updateUser.bind(this));
-    this.router.post("/delete/:id", this.deleteUser.bind(this));
+    this.router.post("/:id", this.updateUser.bind(this));
+    this.router.post("/:id", this.deleteUser.bind(this));
   }
 
   async getUser(req, res, next) {
     try {
       const { users, cnt } = await this.userService.findUsers({
-        skip: req.skiop,
+        skip: req.skip,
         take: req.take,
       });
 
@@ -58,14 +58,14 @@ class UsersController {
       next(err);
     }
   }
-
   async updateUser(req, res, next) {
     try {
       const { id } = req.params;
       const updateUserDto = new UpdateUserdto(req.body);
+
       await this.userService.updateUser(id, updateUserDto);
 
-      res.status(204).json({});
+      res.status(204).json({}); //no content
     } catch (err) {
       next(err);
     }
@@ -82,7 +82,5 @@ class UsersController {
     }
   }
 }
-
 const con = new UsersController();
-
 export default con;

@@ -28,17 +28,16 @@ const { paths } = Object.values(Swaggers).reduce(
         };
       }
     });
-    console.log(acc);
-    console.log(APIs);
-
     return acc;
   },
+
   { paths: {} }
 );
 
-// 스웨거에 등록한 json
+//스웨거에 등록한 json
 export const swaggerDocs = {
   ...defaultSwagger,
+  paths,
 };
 
 //스웨거에 등록

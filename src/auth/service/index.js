@@ -14,10 +14,9 @@ export class AuthService {
 
   async register(props) {
     const isExist = await this.userService.checkEmail(props.email);
+    if (isExist) throw { status: 400, message: "이미 존재하는 이메일입니다" };
 
-    if (isExist) throw { status: 400, message: "이미 존재하는 이메일입니다." };
-
-    const newId = await this.userService.CreateUserdto(
+    const newId = await this.userService.createUser(
       new CreateUserdto({
         ...props,
         password: await props.hashPassword(),
@@ -30,8 +29,8 @@ export class AuthService {
     const refreshToken = jwt.sign({ id: newId }, process.env.JWT_KEY, {
       expiresIn: "14d",
     });
-    console.log({ accessToken, refreshToken });
 
+    console.log({ accessToken, refreshToken });
     return { accessToken, refreshToken };
   }
 }

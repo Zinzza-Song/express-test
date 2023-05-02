@@ -1,13 +1,15 @@
-export class UpdateUserdto {
+export class UpdateUserdto{
+
   age;
   name;
   phoneNumber;
   email;
 
-  constructor(user) {
-    this.age = user.age;
-    this.name = user.name;
-    this.phoneNumber = user.phoneNumber;
-    this.email = user.email;
+  constructor(user){
+      this.age=user.age ?? undefined;
+      this.name=user.name ?? undefined;
+      this.phoneNumber=user.phoneNumber ?? undefined;
+      this.email=user.email ?? undefined;
+
   }
 }

@@ -2,18 +2,18 @@ export const getUserSwagger = {
   "/detail/:id": {
     get: {
       tags: ["User"],
-      summary: "사용자 상세 조회",
+      summary: "유저 상세 조회합니다.",
       parameters: [
         {
           in: "path",
-          required: true,
           name: "id",
+          required: true,
           schema: {
             type: "number",
           },
         },
       ],
-      response: {
+      responses: {
         200: {
           content: {
             "application/json": {
@@ -26,9 +26,11 @@ export const getUserSwagger = {
                       id: {
                         type: "number",
                       },
+
                       name: {
                         type: "string",
                       },
+
                       age: {
                         type: "number",
                       },
@@ -48,18 +50,18 @@ export const getUsersSwagger = {
   "/detail/:id": {
     post: {
       tags: ["User"],
-      summary: "사용자 상세 조회",
+      summary: "유저 상세 조회합니다.",
       parameters: [
         {
           in: "path",
-          required: true,
           name: "id",
+          required: true,
           schema: {
             type: "number",
           },
         },
       ],
-      response: {
+      responses: {
         200: {
           content: {
             "application/json": {
@@ -72,9 +74,11 @@ export const getUsersSwagger = {
                       id: {
                         type: "number",
                       },
+
                       name: {
                         type: "string",
                       },
+
                       age: {
                         type: "number",
                       },
