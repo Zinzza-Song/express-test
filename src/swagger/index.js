@@ -1,5 +1,5 @@
-import * as UserSwagger from "../users/swagger";
 import defaultSwagger from "./defaultSwagger";
+import { UserSwagger } from "../models";
 
 const Swaggers = {
   ...UserSwagger,

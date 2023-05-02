@@ -1,10 +1,11 @@
 import express, { Router } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import Controllers from "./controllers";
 import { swaggerDocs, options } from "./swagger";
 import swaggerUI from "swagger-ui-express";
 import database from "./database";
+import { Controllers } from "./models";
+import { jwtAuth } from "./middleware/jwtAuth";
 
 (async () => {
   const app = express(); //app :express 객체 => 서버 일 처리

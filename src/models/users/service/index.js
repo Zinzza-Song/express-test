@@ -1,4 +1,4 @@
-import database from "../../database";
+import database from "../../../database";
 
 export class UserService {
   async checkEmail(email) {
@@ -9,7 +9,7 @@ export class UserService {
     });
     console.log(user);
     if (!user) return false;
-    return true;
+    return user;
   }
 
   async findUserById(id) {
@@ -42,6 +42,7 @@ export class UserService {
         email: props.email,
         age: props.age,
         phoneNumber: props.phoneNumber,
+        password: props.password,
       },
     });
     return newUser.id;
@@ -65,6 +66,7 @@ export class UserService {
         email: props.email,
         age: props.age,
         phoneNumber: props.phoneNumber,
+        password: props.password,
       },
     });
   }

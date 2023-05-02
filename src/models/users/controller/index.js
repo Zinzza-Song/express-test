@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { pagination } from "../../middleware/pagination";
+import { pagination } from "../../../middleware/pagination";
 import { Userdto, CreateUserdto, UpdateUserdto } from "../dto";
 import { UserService } from "../service";
 
